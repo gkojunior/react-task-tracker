@@ -20,7 +20,7 @@ function App() {
         id: 3,
         text: 'Pick up Kids',
         day:'May 21st at 4pm',
-        reminder: false,
+        reminder: true,
     }
   ])
 
@@ -31,18 +31,24 @@ function App() {
 
   // Toggle Reminder
   const toggleReminder = (id) => {
-    console.log(id);
+    setTasks(
+      tasks.map((task) => 
+      task.id === id ? { ...task, reminder: !task.reminder } : task
+      )
+    )
   }
 
   return (
     <div className="container">
       <Header />
 
-      {/* Displays a message if the list is empty */}
       {tasks.length > 0 ? (
-      <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} /> ) : ( 'No Tasks to Show' )}
+        <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} /> 
+      ) : ( 
+        'No Tasks to Show' 
+      )}
     </div>
-  );
+  )
 }
 
 export default App;
